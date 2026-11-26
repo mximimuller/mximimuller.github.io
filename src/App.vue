@@ -64,12 +64,12 @@ const profiles = [
   font-display: swap;
 }
 
+html {
+  background-color: #edf0f5;
+}
+
 body {
   margin: 0;
-  background:
-    radial-gradient(ellipse at 88% 18%, #e8edff 0%, transparent 60%),
-    radial-gradient(ellipse at 8% 90%, #f8e5db 0%, transparent 56%),
-    #fdfdfc;
   color: #171716;
   font-family: "Geist", system-ui, -apple-system, sans-serif;
 }
@@ -79,17 +79,31 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
+  height: 100dvh;
+  background:
+    radial-gradient(ellipse at 88% 18%, #e8edff 0%, transparent 60%),
+    radial-gradient(ellipse at 8% 90%, #f8e5db 0%, transparent 56%) #fdfdfc;
   pointer-events: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .shader-background {
+    mask-image: linear-gradient(transparent, black 9%, black 91%, transparent);
+  }
 }
 
 main {
   position: relative;
   box-sizing: border-box;
   min-block-size: 100vh;
-  min-block-size: 100svh;
+  min-block-size: 100dvh;
   display: grid;
   place-items: center;
   padding: 1.5rem;
+  padding-top: max(1.5rem, env(safe-area-inset-top, 0px));
+  padding-right: max(1.5rem, env(safe-area-inset-right, 0px));
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+  padding-left: max(1.5rem, env(safe-area-inset-left, 0px));
   text-align: center;
 }
 

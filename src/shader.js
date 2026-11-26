@@ -125,13 +125,13 @@ export function startShader(canvas) {
 
   canvas.addEventListener("webglcontextlost", onContextLost);
   canvas.addEventListener("webglcontextrestored", onContextRestored);
-  window.addEventListener("resize", refresh);
-  refresh();
+  const resizeObserver = new ResizeObserver(refresh);
+  resizeObserver.observe(canvas);
 
   return () => {
     canvas.removeEventListener("webglcontextlost", onContextLost);
     canvas.removeEventListener("webglcontextrestored", onContextRestored);
-    window.removeEventListener("resize", refresh);
+    resizeObserver.disconnect();
     if (scene) {
       gl.deleteBuffer(scene.buffer);
       gl.useProgram(null);
